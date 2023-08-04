@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="test2.css" rel="stylesheet">
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/instagram.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/phone.css' rel='stylesheet'>
+
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@200&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@200&family=PT+Mono&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Ally.Baty_Web_Design</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="content__container">
+          <p class="content__container__text">
+          </p>
+          <ul class="content__container__list">
+            <li class="content__container__list__item">Web Design </li>
+            <li class="content__container__list__item">& Development</li>
+            <li class="content__container__list__item">Html, Css, Js</li>
+            <li class="content__container__list__item">React.js</li>
+          </ul>
+        </div>
+    </div>
+
+
+    <section>
+    <div class="loop-wrapper">
+        <div class="mountain"></div>
+        <div class="hill"></div>
+        <div class="tree" passed=false></div>
+        <div class="tree" passed=false></div>
+        <div class="tree" passed=false></div>
+        <div class="rock"></div>
+    </div>
+ 
+    <div id="score">Score: 0  </div> <!-- Add the id attribute to the score div --> 
+   
+   
+      <div class="square">
+        <h1>Ally Baty</h1>
+      </div>
+  </section>
+
+
+  <script>
+    // Get references to the h1, trees, and score elements
+    const h1 = document.querySelector('.square > h1');
+    const trees = document.querySelectorAll('.tree, .tree.collision');
+
+    const scoreElement = document.getElementById('score');
+
+    // Initialize game variables
+    let isJumping = false;
+    let score = 0;
+
+    // Function to handle h1 movement
+    function moveH1() {
+        if (isJumping) return;
+
+        h1.classList.add('jump');
+        setTimeout(() => {
+            h1.classList.remove('jump');
+        }, 500);
+        checkCollision();
+    }
+//check collisoom 
+function checkCollision() {
+  const h1Rect = h1.getBoundingClientRect();
+
+  trees.forEach(tree => {
+    const treeRect = tree.getBoundingClientRect();
+
+    if (isColliding(h1Rect, treeRect)) {
+      gameOver();
+    } else {
+      // Check if h1 cleared a tree
+      if (h1Rect.right >= treeRect.left && !tree.passed) {
+        if (h1Rect.bottom <= treeRect.top + 10) { // Adjusted to consider some margin
+          tree.passed = true;
+          increaseScore();
+        }
+      }
+    }
+  });
+}
+
+    // Function to check if two elements are colliding
+    function isColliding(rect1, rect2) {
+        return (
+            rect1.left < rect2.right &&
+            rect1.right > rect2.left &&
+            rect1.top < rect2.bottom &&
+            rect1.bottom > rect2.top
+        );
+    }
+
+    // Function to increase the score
+    function increaseScore() {
+        score++;
+        updateScore();
+    }
+
+   // Function to update the score in the HTML
+function updateScore() {
+  scoreElement.textContent = `Score: ${score}`;
+}
+
+    // Function to end the game
+    function gameOver() {
+        alert('Game Over!');
+    }
+
+    // Event listener for spacebar keydown
+    window.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+            event.preventDefault(); // Prevents the default page scrolling behavior
+            moveH1();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="enter_btn">
+        <a href="home.html">
+            <button class="button-49" role="button">Enter</button>
+        </a>
+    </div>
+
+    <footer>
+        <a href=""><i class="gg-instagram"></i></a>
+        <i class="gg-phone"></i>
+        <h6>allybaty@gmail.com</h6>
+        <div class="tm">
+            <h5>&#8482AllyBaty</h5>
+            <h6>2023</h6>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+</body>
+</html>
